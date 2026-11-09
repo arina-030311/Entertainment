@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entertainment Quest – Homework</title>
+<style>
+:root{--ink:#0d1730;--night:#16284d;--gold:#d8b45f;--gold2:#f3dc9a;--parch:#f6f2e7;--text:#1d2638;--red:#2b4c86;--green:#2e6b3a;--bad:#a3201f}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Palatino Linotype",Palatino,Georgia,serif;color:var(--text);background:radial-gradient(circle at 20% 10%,#27508a 0,transparent 40%),radial-gradient(circle at 85% 90%,#1b6470 0,transparent 40%),var(--ink);background-attachment:fixed}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;max-width:760px;margin:0 auto;padding:14px 16px 6px;color:var(--gold2)}
+.brand{font-size:1.15rem;font-weight:bold;letter-spacing:.5px}
+.pts{font-size:.95rem;background:#0004;border:1px solid var(--gold);border-radius:20px;padding:4px 12px}
+.steps{display:flex;gap:6px;max-width:760px;margin:0 auto;padding:0 16px 8px}
+.steps i{flex:1;height:6px;border-radius:3px;background:#ffffff26}
+.steps i.d{background:var(--gold)}.steps i.c{background:var(--gold2);box-shadow:0 0 8px var(--gold)}
+main{max-width:760px;margin:0 auto;padding:6px 16px 40px}
+.card{background:var(--parch);border:3px double var(--gold);border-radius:10px;padding:20px 18px;box-shadow:0 10px 30px #0008}
+.tag{font-size:.9rem;color:var(--red);font-weight:bold}
+h1{margin:.2em 0 .3em;font-size:2rem;line-height:1.15;color:var(--red)}
+h2{margin:.25em 0 .4em;font-size:1.35rem;line-height:1.25}
+p{line-height:1.5}.sub{margin:.2em 0 .8em}
+.rule{background:#fff8;border-left:4px solid var(--red);padding:8px 12px;margin:10px 0 14px;font-size:.98rem;line-height:1.6}
+.cnt{float:right;font-size:.9rem;color:#6b5a3c}
+.q{font-size:1.4rem;line-height:1.5;margin:12px 0}
+.gap{display:inline-block;min-width:70px;border-bottom:3px solid var(--red);text-align:center}
+.sg{display:inline-block;width:1.5em;height:1.5em;line-height:1.5em;text-align:center;border-radius:50%;color:#fff;font-size:.9em;margin-left:6px}
+.sg.yes{background:var(--green)}.sg.no{background:var(--bad)}
+.opts,.row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.opt,.mb,.tile{background:#fff;border:2px solid #9a7f3c;border-radius:8px;padding:10px 16px;font-size:1.1rem;color:var(--text);transition:transform .1s,background .15s}
+.opt:hover:not(:disabled),.mb:hover:not(:disabled),.tile:hover{background:#fdf1c9;transform:translateY(-1px)}
+.opt.x{background:#f5c9c6;border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.opt.g,.mb.g{background:#cfe8d0;border-color:var(--green);color:#1b4a25}
+.mb.s{background:var(--gold2);border-color:var(--red)}
+.opt:disabled,.mb:disabled{cursor:default}
+.btn{background:var(--red);color:#fff;border:2px solid var(--gold);border-radius:8px;padding:11px 22px;font-size:1.05rem;font-weight:bold}
+.btn:hover{background:#3a62a8}.btn.ghost{background:transparent;color:var(--red);border-color:var(--red)}
+.btn:disabled{opacity:.5;cursor:default}
+.fb{margin:10px 0;padding:10px 12px;border-radius:8px;line-height:1.45}
+.fb.ok{background:#d8efd9;color:#1b4a25}.fb.no{background:#f7d6d3;color:#7a1816}
+.m{display:grid;grid-template-columns:1fr 1.3fr;gap:10px}
+.m>div{display:flex;flex-direction:column;gap:8px}.m .mb{text-align:left;width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{background:#fff;border:1px solid #9a7f3c;border-radius:16px;padding:3px 11px;font-size:.95rem}
+.chip.f{background:var(--night);color:var(--gold2);border-color:var(--night)}
+.facts{background:var(--night);color:var(--gold2);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:1.1rem}
+.facts b{font-size:2rem;margin-right:8px;vertical-align:middle}
+.tray{min-height:56px;border:2px dashed #9a7f3c;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;background:#fff6}
+.bank{border-style:solid;border-color:#c9b27a}
+.ph{color:#8a7a5a;font-style:italic;align-self:center}
+input[type=text],textarea{width:100%;font:inherit;font-size:1.15rem;padding:10px;border:2px solid #9a7f3c;border-radius:8px;background:#fff;color:var(--text)}
+textarea{min-height:130px;resize:vertical;line-height:1.5}
+.big{font-size:2.6rem;color:var(--red);margin:.1em 0}
+.rev{margin:6px 0;padding-left:18px;line-height:1.5}
+.small{background:none;border:none;color:var(--gold2);text-decoration:underline;font-size:.85rem;opacity:.8}
+footer{text-align:center;padding-bottom:20px}
+@media(max-width:520px){h1{font-size:1.6rem}.q{font-size:1.2rem}.m{grid-template-columns:1fr 1fr}.m .mb{font-size:.95rem;padding:9px 8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div id="app"></div>
+<script>
+const KEY='ent_hw_v1',$=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const ENT={'a concert':'🎤  live music','an exhibition':'🖼️  pictures and art','a film':'🎬  cinema','a musical':'🎶  actors sing','a play':'🎭  actors speak','a TV show':'📺  at home','a quest':'🔦  find clues'};
+const WORDS=Object.keys(ENT),NW=WORDS.length;
+const ING={jump:'p',play:'p',watch:'p',swim:'d',run:'d',sit:'d',dance:'e',have:'e',write:'e',go:'p'};
+const ing=v=>ING[v]==='d'?v+v.slice(-1)+'ing':ING[v]==='e'?v.slice(0,-1)+'ing':v+'ing';
+const rh=v=>ING[v]==='d'?`${v}: согласная + гласная + согласная → удваиваем последнюю букву (swim → swimming).`:ING[v]==='e'?`${v} оканчивается на e → убираем e и добавляем ing (dance → dancing).`:`${v}: ничего не меняем, просто + ing (jump → jumping).`;
+const EMW={'😍 ':'love','🙂 ':'like','😡 ':'hate'};
+const EM={love:'😍 ',like:'🙂 ',hate:'😡 '};
+const s3=x=>x==='He'||x==='She';
+const SE=(a,f,v,o)=>`${a} ${f}${s3(a)?'s':''} ${ing(v)}${o?' '+o:''}.`;
+const RULE='<b>Запомни:</b> I 😍  love / 🙂  like / 😡  hate + <b>verb-ing</b>. He / She → loves / likes / hates.<br>jump → jumping · swim → swimming · run → running · dance → dancing · have → having';
+const card=i=>`<div class="facts"><b>${EM[i[1]]}</b>${i[0]} · ${i[1]} · ${i[2]}${i[3]?' · '+i[3]:''}</div>`;
+const sh=i=>`После like / love / hate глагол ставим с -ing: ${i[2]} → ${ing(i[2])}. ${s3(i[0])?'He / She → likes / loves / hates (+s).':''}`;
+const TK={
+2:{name:'Ing Sorting',norule:1,sub:'К какому правилу относится глагол? Выбери, как добавить -ing.',max:2,type:'c',lab:{p:'просто + ing',d:'удвоить букву + ing',e:'убрать e + ing'},
+ items:['jump','swim','dance','run','have','watch','sit','write'].map(v=>[v]),
+ view:i=>`<p class="q">🎯  <b>${i[0]}</b> + ing → ?</p><div class="opts"><button class="opt" data-v="p" onclick="pick(this)">просто + ing</button><button class="opt" data-v="d" onclick="pick(this)">удвоить букву + ing</button><button class="opt" data-v="e" onclick="pick(this)">убрать e + ing</button></div>`,
+ ans:i=>ING[i[0]],rep:i=>i[0],hint:i=>rh(i[0])},
+3:{name:'Spell the Verb',sub:'Напиши глагол с окончанием -ing.',max:3,type:'w',
+ items:['swim','dance','run','have','watch','write'].map(v=>[v]),
+ view:i=>`<div class="facts"><b>✍️ </b>${i[0]} → ?</div>${INP}`,
+ ans:i=>ing(i[0]),rep:i=>i[0]+' → ?',hint:i=>rh(i[0])},
+4:{name:'Build the Sentence',sub:'Собери предложение. Не забудь -ing после like / love / hate!',max:3,type:'b',
+ items:[['I','love','watch','films'],['She','like','go','to concerts'],['He','hate','watch','TV shows'],['I','like','go','to exhibitions'],['She','love','watch','musicals'],['I','hate','sit','at home']],
+ view:i=>`${BLD}`,
+ tiles:i=>[...SE(...i).split(' '),i[2]],ans:i=>SE(...i),rep:i=>SE(...i),hint:sh},
+5:{name:'Who Likes What?',sub:'Прочитай предложение под карточкой. Оно подходит к смайлику? Выбери True или False. Если False — напиши правильное предложение.',max:2,type:'t',
+ items:[{e:'😍 ',n:'Anna',a:'dancing',s:'Anna loves dancing.',v:1},{e:'😡 ',n:'Tom',a:'watching films',s:'Tom likes watching films.',fix:'Tom hates watching films.',v:0},{e:'🙂 ',n:'Mia',a:'going to concerts',s:'Mia loves going to concerts.',fix:'Mia likes going to concerts.',v:0},{e:'😡 ',n:'Ben',a:'swimming',s:'Ben hates swimming.',v:1},{e:'😍 ',n:'Kate',a:'going to exhibitions',s:'Kate hates going to exhibitions.',fix:'Kate loves going to exhibitions.',v:0},{e:'🙂 ',n:'Max',a:'watching TV shows',s:'Max likes watching TV shows.',v:1}],
+ view:i=>`<div class="facts"><b>${i.e}</b>${i.n} · ${i.a}</div><p class="q">“${i.s}”</p><div class="opts"><button class="opt" data-v="True" onclick="pick(this)">True</button><button class="opt" data-v="False" onclick="pick(this)">False</button></div>`,
+ ans:i=>i.v?'True':'False',rep:i=>i.s+' '+i.e,hint:i=>'Смотри на смайлик: 😍  = love, 🙂  = like, 😡  = hate. Подходит ли он к глаголу в предложении?'},
+6:{name:'Write the Sentence',sub:'Напиши предложение целиком: I / He / She + like / love / hate + verb-ing.',max:3,type:'w',
+ items:[['I','love','swim',''],['He','hate','run',''],['She','like','dance',''],['I','like','watch','plays'],['He','love','go','on quests']],
+ view:i=>`${card(i)}${INP}`,ans:i=>SE(...i),rep:i=>`${i[0]} ${i[1]} ${i[2]} ${i[3]}`.trim(),hint:(i,n)=>n===0?'Формула: I / He / She + like / love / hate + verb-ing. После He / She добавь -s: likes, loves, hates.':sh(i)}
+};
+const INP='<input type="text" id="tin" autocomplete="off" spellcheck="false" placeholder="Напиши ответ" onkeydown="if(event.key===\'Enter\')chkW()"><div class="row"><button class="btn" id="cb" onclick="chkW()">Проверить</button></div>';
+const BLD='<div id="ans" class="tray"></div><div id="bank" class="tray bank"></div><div class="row"><button class="btn" onclick="chkB()">Проверить</button><button class="btn ghost" onclick="clrB()">Очистить</button></div>';
+const MAX=NW+Object.values(TK).reduce((s,t)=>s+t.items.length,0);
+const lb=(T,a)=>T.lab?(T.lab[a]||a):a;
+function fresh(){return{scr:0,p:[0,0,0,0,0,0,0],log:{},m1:{},d1:[],o1:null,open:''}}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.p&&x.log)return x}catch(e){}return fresh()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=load(),cur=null,sel1=null;
+function score(){let p=WORDS.filter(w=>S.d1.includes(w)&&!S.m1[w]).length;for(const k in S.log)if(S.log[k].first)p++;return p}
+function updPts(){const e=$('.pts');if(e)e.textContent='✦ '+score()+' очков'}
+function go(n){S.scr=n;save();cur=null;sel1=null;render();scrollTo(0,0)}
+function restart(){if(confirm('Начать заново? Все ответы будут удалены.')){S=fresh();save();cur=null;render()}}
+function head(){return `<header><div class="brand">✦ Entertainment Quest</div><div class="pts">✦ ${score()} очков</div></header><div class="steps">${[1,2,3,4,5,6,7].map(i=>`<i class="${S.scr>i?'d':S.scr===i?'c':''}"></i>`).join('')}</div>`}
+function render(){
+ let h;
+ if(S.scr===0)h=intro();else if(S.scr===1)h=t1();else if(S.scr<=6)h=item(S.scr);else if(S.scr===7)h=t7();else h=result();
+ const play=S.scr>0&&S.scr<8;
+ $('#app').innerHTML=(play?head():'')+'<main>'+h+(play?'<footer><button class="small" onclick="restart()">↺ Начать заново</button></footer>':'')+'</main>';
+ if(S.scr===1)draw1();
+ if(S.scr>=2&&S.scr<=6&&TK[S.scr].type==='b')drawB();
+}
+function intro(){return `<section class="card"><div class="tag">Домашнее задание · Развлечения и like / love / hate</div><h1>Добро пожаловать в Entertainment Quest</h1>
+<p>Сегодня ты тренируешь слова про развлечения и учишься говорить, что ты любишь и не любишь делать. После like / love / hate глагол стоит с окончанием <b>-ing</b>.</p>
+<div class="rule">I 😍  <b>love</b> watching films.<br>She 🙂  <b>likes</b> going to concerts.<br>He 😡  <b>hates</b> sitting at home.</div>
+<p><b>Как добавить -ing:</b></p>
+<div class="rule">jump → jump<b>ing</b> (просто + ing)<br>swim → swi<b>mm</b>ing, run → ru<b>nn</b>ing (согл + глас + согл → удвоитьпоследнюю букву)<br>dance → danc<b>ing</b>, have → hav<b>ing</b> (убрать e)</div>
+<p>Слова:</p><div class="chips">${WORDS.map(w=>`<span class="chip f">${ENT[w].split(' ')[0]} ${w}</span>`).join('')}</div>
+<p>В работе 7 заданий. За каждый правильный ответ с первой попытки ты получаешь очко. В конце нажми «Скопировать учителю» и отправь результаты учителю.</p>
+<button class="btn" onclick="go(1)">Начать →</button></section>`}
+function t1(){if(!S.o1)S.o1=shuffle(WORDS);return `<section class="card"><div class="tag">Задание 1 · Word Match</div><h2>Соедини слово с подсказкой</h2><p class="sub">Нажми на слово слева, потом на подходящую подсказку справа.</p><div class="m"><div id="L"></div><div id="R"></div></div><div id="fb"></div><div id="act"></div></section>`}
+function draw1(){
+ const d=w=>S.d1.includes(w);
+ $('#L').innerHTML=WORDS.map(w=>`<button class="mb ${d(w)?'g':''} ${sel1===w?'s':''}" ${d(w)?'disabled':''} data-w="${w}" onclick="lp(this)">${w}</button>`).join('');
+ $('#R').innerHTML=S.o1.map(w=>`<button class="mb ${d(w)?'g':''}" ${d(w)?'disabled':''} data-w="${w}" onclick="rp(this)">${ENT[w]}</button>`).join('');
+ if(S.d1.length===NW)$('#act').innerHTML='<button class="btn" onclick="go(2)">Дальше →</button>';
+}
+function lp(b){sel1=b.dataset.w;draw1()}
+function rp(b){
+ if(!sel1){$('#fb').innerHTML='<div class="fb no">Сначала нажми на слово слева.</div>';return}
+ const w=b.dataset.w;
+ if(w===sel1){S.d1.push(w);$('#fb').innerHTML=`<div class="fb ok">✓ ${w} = ${ENT[w]}</div>`}
+ else{S.m1[sel1]=(S.m1[sel1]||0)+1;$('#fb').innerHTML='<div class="fb no">✗ Не подходит. Выбери слово ещё раз и попробуй снова.</div>'}
+ sel1=null;save();draw1();updPts();
+}
+function item(t){
+ const T=TK[t],k=S.p[t],it=T.items[k];
+ if(!cur||cur.t!==t||cur.k!==k){cur={t,k,tries:[],done:false,placed:[],tiles:null};
+  if(T.type==='b')cur.tiles=shuffle(T.tiles(it)).map(w=>({w}))}
+ return `<section class="card"><div class="tag">Задание ${t} · ${T.name}</div><span class="cnt">${k+1} / ${T.items.length}</span><h2>${T.sub}</h2>${T.view(it)}<div id="fb"></div><div id="act"></div></section>`;
+}
+function it_(){return TK[cur.t].items[cur.k]}
+function resolve(ok,shown,ans){
+ const T=TK[cur.t],n=cur.tries.length;cur.tries.push(shown);
+ const fb=$('#fb');
+ if(ok){fin(true,false);fb.innerHTML=`<div class="fb ok">✓ Верно! ${cur.tries.length>1?'Хорошо, что исправила ошибку.':'С первой попытки!'}</div>`}
+ else if(cur.tries.length>=T.max){fin(false,true);fb.innerHTML=`<div class="fb no">✗ В этот раз не получилось. Правильный ответ: <b>${esc(lb(T,ans))}</b>${it_().fix?'<br>Правильное предложение: <b>'+esc(it_().fix)+'</b>':''}<br>${T.hint(it_(),9)}</div>`}
+ else fb.innerHTML=`<div class="fb no">✗ ${T.hint(it_(),n)} Попробуй ещё раз.</div>`;
+ return ok||cur.done;
+}
+function fin(ok,rev){
+ cur.done=true;S.log[cur.t+'.'+cur.k]={tries:cur.tries,first:ok&&cur.tries.length===(cur.st2?2:1),rev:rev};save();
+ const last=cur.k>=TK[cur.t].items.length-1;
+ $('#act').innerHTML=`<button class="btn" onclick="nxt()">${last?'Закончить задание →':'Дальше →'}</button>`;
+ document.querySelectorAll('.opt,.tile,#tin,#cb').forEach(e=>e.disabled=true);
+ updPts();
+}
+function nxt(){const t=cur.t;S.p[t]++;if(S.p[t]>=TK[t].items.length)go(t+1);else{save();cur=null;render()}}
+function pick(b){
+ if(cur.done||cur.st2)return;const T=TK[cur.t],it=it_(),a=T.ans(it),v=b.dataset.v,ok=v===a;
+ if(ok&&it.fix){cur.tries.push(v);cur.st2=1;cur.fx=0;b.classList.add('g');document.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+  $('#fb').innerHTML='<div class="fb ok">✓ Верно, это предложение неверное. Теперь напиши правильное предложение.</div>';
+  $('#act').innerHTML=INP.split('chkW()').join('chkF()');return}
+ if(!ok){b.classList.add('x');b.disabled=true}
+ if(resolve(ok,v,a))document.querySelectorAll('.opt').forEach(x=>{if(x.dataset.v===a)x.classList.add('g')});
+}
+function chkF(){
+ if(cur.done)return;const v=$('#tin').value.trim();if(!v)return;const it=it_();
+ cur.tries.push(v);cur.fx++;
+ if(norm(v)===norm(it.fix)){fin(true,false);$('#fb').innerHTML=`<div class="fb ok">✓ Верно! ${cur.tries.length>2?'Хорошо, что исправила ошибку.':'С первой попытки!'}</div>`}
+ else if(cur.fx>=3){fin(false,true);$('#fb').innerHTML=`<div class="fb no">✗ В этот раз не получилось. Правильное предложение: <b>${esc(it.fix)}</b></div>`}
+ else{$('#fb').innerHTML=`<div class="fb no">✗ Смайлик ${it.e} = ${EMW[it.e]}. Напиши предложение целиком: имя + ${EMW[it.e]}${/^(Anna|Tom|Mia|Ben|Kate|Max)$/.test(it.n)?'s':''} + глагол с -ing. Попробуй ещё раз.</div>`;$('#tin').select()}
+}
+function drawB(){
+ $('#ans').innerHTML=cur.placed.map(i=>`<button class="tile" onclick="tb(${i},0)">${esc(cur.tiles[i].w)}</button>`).join('')||'<span class="ph">Нажимай на слова по порядку</span>';
+ $('#bank').innerHTML=cur.tiles.map((t,i)=>cur.placed.includes(i)?'':`<button class="tile" onclick="tb(${i},1)">${esc(t.w)}</button>`).join('');
+ if(cur.done)document.querySelectorAll('.tile').forEach(e=>e.disabled=true);
+}
+function tb(i,add){if(cur.done)return;if(add)cur.placed.push(i);else cur.placed=cur.placed.filter(x=>x!==i);drawB()}
+function clrB(){if(!cur.done){cur.placed=[];drawB()}}
+function chkB(){
+ if(cur.done||!cur.placed.length)return;
+ const a=TK[cur.t].ans(it_()),v=cur.placed.map(i=>cur.tiles[i].w).join(' ');
+ const d=resolve(v===a,v,a);if(!d)cur.placed=[];drawB();
+}
+const norm=s=>s.toLowerCase().replace(/[’‘`]/g,"'").replace(/[.!\s]+$/,'').replace(/\s+/g,' ').trim();
+function chkW(){
+ if(cur.done)return;const v=$('#tin').value.trim();if(!v)return;
+ const a=TK[cur.t].ans(it_());
+ if(resolve(norm(v)===norm(a),v,a)===false)$('#tin').select();
+}
+function t7(){return `<section class="card"><div class="tag">Задание 7 · Your Own Sentences</div><h2>Расскажи о себе тремя предложениями</h2><div class="rule">Напиши 3 предложения про развлечения: одно с <b>love</b>, одно с <b>like</b>, одно с <b>hate</b>. После них ставь глагол с -ing.<br>Пример: I love watching films. I like going to concerts. I hate sitting at home.</div>
+<div class="chips">${WORDS.map(w=>`<span class="chip f">${ENT[w].split(' ')[0]} ${w}</span>`).join('')}</div>
+<textarea id="op" placeholder="I love ...">${esc(S.open)}</textarea><div id="fb"></div><div class="row"><button class="btn" onclick="fin7()">Закончить →</button></div><p class="sub">Этот ответ прочитает учитель.</p></section>`}
+function fin7(){
+ const v=$('#op').value;S.open=v;save();
+ if(v.split(/[.!\n]+/).filter(x=>x.trim().length>3).length<3){$('#fb').innerHTML='<div class="fb no">Напиши 3 предложения, потом нажми «Закончить».</div>';return}
+ go(8);
+}
+document.addEventListener('input',e=>{if(e.target.id==='op'){S.open=e.target.value;save()}});
+function report(){
+ let r=`Entertainment and like / love / hate + -ing — Homework\nРезультат: ${score()}/${MAX} (баллы за ответы с первой попытки)\n`;
+ r+='\nЗадание 1 · Word Match\n'+(Object.keys(S.m1).length?'Ошибки: '+Object.entries(S.m1).map(([w,n])=>`${w} (${n})`).join(', '):'Все пары без ошибок ✓');
+ const rev=[];
+ for(const t of [2,3,4,5,6]){const T=TK[t];r+=`\n\nЗадание ${t} · ${T.name}`;
+  T.items.forEach((it,k)=>{const l=S.log[t+'.'+k];if(!l)return;
+   r+=`\n${k+1}. ${T.rep(it)}\n   `+l.tries.map((a,i)=>`${lb(T,a)} ${(it.fix?(a==='False'||norm(a)===norm(it.fix)):(!l.rev&&i===l.tries.length-1))?'✓':'✗'}`).join(' → ')+(l.rev?' (ответ показан)':'')+` | попыток: ${l.tries.length}`;
+   if(!l.first)rev.push(`${T.rep(it)} → ${lb(T,T.ans(it))}`)})}
+ r+=`\n\nЗадание 7 · Own sentences (ответ ученика)\n${S.open.trim()}`;
+ const mm=Object.keys(S.m1);
+ r+='\n\nЧто стоит повторить:\n'+((rev.length||mm.length)?[...(mm.length?['Слова: '+mm.join(', ')]:[]),...rev].map(x=>'• '+x).join('\n'):'Всё получилось с первой попытки ✓');
+ return r;
+}
+function result(){
+ const p=score(),rep=report();
+ return `<section class="card"><div class="tag">Домашнее задание выполнено</div><h1>Квест пройден!</h1><div class="big">${p} / ${MAX}</div><p>Очки за ответы с первой попытки. Нажми кнопку «Скопировать учителю» и отправь результаты учителю.</p>
+<div class="row"><button class="btn" onclick="copyR()">Скопировать учителю</button><button class="btn ghost" onclick="restart()">↺ Начать заново</button></div><div id="cm" aria-live="polite"></div>
+<textarea id="rep" readonly style="min-height:240px;font-size:.9rem">${esc(rep)}</textarea></section>`;
+}
+async function copyR(){
+ const t=report();let ok=false;
+ try{await navigator.clipboard.writeText(t);ok=true}catch(e){
+  try{const ta=$('#rep');ta.removeAttribute('readonly');ta.select();ok=document.execCommand('copy');ta.setAttribute('readonly','')}catch(e2){}}
+ $('#cm').innerHTML=ok?'<div class="fb ok">✓ Результаты скопированы. Теперь отправь их учителю.</div>':'<div class="fb no">Не удалось скопировать автоматически. Выдели текст ниже и скопируй его вручную.</div>';
+ if(!ok){$('#rep').focus();$('#rep').select()}
+}
+render();
+</script></body></html>
